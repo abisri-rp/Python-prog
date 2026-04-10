@@ -1,0 +1,36 @@
+1.Read the dta from the file and display the word occurences,repeated word,Largest repeated word. Reverse the largest repeated word.
+
+filename="input.txt" 
+with open(filename, "r") as file:
+    text=file.read()
+words=text.lower().split()
+count={}
+for word in words:
+    if word in count:
+        count[word]+=1
+    else:
+        count[word]=1
+print("Word Occurrences:\n")
+for word in count:
+   print(word,":",count[word])
+repeat=[]
+for word in count:
+    if count[word]>1:
+        repeat.append(word)
+largest=""
+for word in repeat:
+   lenword=0
+   for l in word:
+      lenword+=1
+   lenlarge=0
+   for la in largest:
+      lenlarge+=1
+   if lenword > lenlarge:
+        largest = word
+reverse=""
+for ch in largest:
+   reverse=ch+reverse
+print("\nRepeated words:", repeat)
+print("Largest repeated word:", largest)
+print("Reverse of largest word:", reverse)
+
