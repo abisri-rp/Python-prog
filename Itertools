@@ -1,0 +1,64 @@
+1. List the combination of 2 for the list ['A','B','C','D']
+
+from itertools import combinations
+data=['A','B','C','D']
+pairs=list(combinations(data, 2))
+print(pairs)
+
+2. List the permutation for the list [1, 2, 3]
+
+from itertools import permutations
+data = [1, 2, 3]
+print(list(permutations(data, 2)))
+
+3. List the combination with replacement for list [1,2]
+
+from itertools import combinations_with_replacement
+data=[1,2]
+print(list(combinations_with_replacement(data, 2)))
+
+4. Display the 5 numbers after 10 usong itertools. 
+
+from itertools import count
+for i in count(10, 1):
+   if i>14: 
+      break
+   print(i,end=" " "\n")
+
+5. Display the 3 cycle for [5,10,15]
+
+from itertools import cycle
+counter=0
+for item in cycle([5,10,15]):
+   print(item,end=" " "\n")
+   counter+=1
+   if counter>8:
+      break
+
+6. List the permutation for the list ['X','Y','Z']
+
+from itertools import permutations
+data = ['X','Y','Z']
+print(list(permutations(data, 2)))
+
+
+7. Display the list ['a','b'] for upto 3 cycles
+
+import itertools
+data=['a','b']
+cyciter=itertools.cycle(data)
+result=list(itertools.islice(cyciter,6))
+print(result)
+
+8. Display the combination of product 2 for list ['red','green','blue'] with repetition.
+
+import itertools
+colors=['red','green','blue']
+combinations=itertools.product(colors,repeat=2)
+for i in combinations:
+       print(i)
+
+
+
+
+
