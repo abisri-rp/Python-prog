@@ -1,0 +1,57 @@
+1.Create a class Car with a method drive() that prints "Vroom!"
+
+class Car:
+   def drive(self):
+      print("Vroom")
+mycar=Car()
+mycar.drive()
+
+2. Create a class Book with title and author, and a method to display them.
+
+class Book:
+   def __init__(self,title,author):
+      self.title=title
+      self.author=author
+   def display(self):
+      print(f"{self.title} is written by {self.author}")
+b1=Book("Harry Potter","JK Rowling")
+b1.display()
+
+
+3. Create a class Rectangle with length and width, and method area().
+
+class Rectangle:
+   def __init__(self,length,width):
+      self.length=length
+      self.width=width
+   def area(self):
+      return 0.5*self.length*self.width
+r=Rectangle(4,6)
+print("Area:",r.area())
+
+
+4. Create a class Fan with a default speed of "Medium" and a method status().
+
+class Fan:
+   def __init__(self,speed="Medium"):
+      self.speed=speed
+   def status(self):
+      print(f"Fan status is in {self.speed}")
+f1=Fan()
+f1.status()
+f2=Fan("High")
+f2.status()
+
+5. Create a class Bird that inherits from Animal and overrides speak() to say "Tweet
+
+class Animal:
+   def speak(self):
+      print("Animal speaks")
+class Bird(Animal):
+   def speak(self):
+      print("Tweet")
+a=Animal()
+a.speak()
+b=Bird()
+b.speak()
+
