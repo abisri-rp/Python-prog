@@ -1,0 +1,223 @@
+1. Student Attendance Analysis
+A university maintains attendance records for two different days using sets of student roll numbers. Write a Python program using set operations to:
+Identify students present on both days.
+Identify students present on either day.
+Identify students absent on the second day.
+
+day1 = {128, 105, 109, 145, 109}
+day2 = {109, 184, 145, 176}
+print(day1)
+print(day2)
+print("Present on both days:",day1&day2)
+print("Present on either day:", day1|day2)
+print("Absent on second day:", day1-day2)
+
+2. Two users on an online learning platform have sets of course interests. Develop a Python program using sets to:
+Find the common interests between the users.Suggest new courses to one user based on the other user’s interests
+
+user1={"Python", "Data Science", "AI"}
+user2={"Web Dev", "Python", "Cloud Computing"}
+print("User1 course interest",user1)
+print("User2 course interest",user2)
+print("Common interests:",user1&user2)
+print("Suggested for User 1 from User 2:",user2-user1)
+
+3. An online store maintains a set of available products and another set of sold products. Develop a Python program using sets to determine:
+Products still in stock.
+Products that have been sold out.
+
+Available = {"Laptop","Mouse","Keyboard","Monitor","Telephone","Microphone"}
+Sold = {"Mouse","Monitor","Webcam"}
+print("Available items:",Available)
+print("Sold items:",Sold)
+print("Still in stock:",Available-Sold)
+print("Items that are sold out:",Sold&Available)
+
+4. An organization records three sets of IP addresses:
+ L – logged in successfully
+ F – failed login attempts
+ B – blacklisted IP addresses
+
+ Using set operations, identify:
+ IPs that appear in both successful and failed logins but are not blacklisted.
+ IPs that attempted access but never succeeded.
+ IPs that are only blacklisted and never attempted login
+
+L = {"172.16.16.200", "10.0.0.5"}
+F = {"172.16.16.200", "172.16.0.2"}
+B = {"172.16.0.2", "192.168.1.50"}
+print("Logged in successfully",L)
+print("Failed log in",F)
+print("Blocked IP",B)
+print("Both login types, not blocklisted:",(L&F)-B)
+print("Attempted but never succeeded:",F-L)
+print("Only blocklisted, never attempted:",B-(L|F))
+
+
+5.  An array contains skills required for a job role, another array contains skills of an applicant, and a string contains skills that are outdated. Write a Python program using set operations to identify missing required skills excluding outdated ones.
+
+Required = {"Python", "SQL", "Cloud", "DBMS"}
+Applicant = {"Python", "Java"}
+Outdated = {"Computing", "DBMS"}
+print("Required skill:",Required)
+print("Applicant skill:",Applicant)
+print("Outdated skill:",Outdated)
+Missing_skills =(Required-Applicant)-Outdated
+print("Missing required skills:",Missing_skills)
+
+
+6.A university maintains collaboration records of students participating in multiple technical clubs. Each record is stored as a list of strings, where each string follows this format:
+ StudentName:Club1,Club2,Club3
+ records = ["Arun:AI,ML,Robotics",  "Bala:ML,IoT", "Chitra:AI,CyberSecurity", "Divya:Robotics,IoT,AI", "Ezhil:ML,CyberSecurity","Farah:AI,ML", "Ganesh:IoT,Robotics,AI",   "Hari:ML"]
+ Write a Python program that performs the following operations strictly using combinations of lists, strings, and sets.
+ Extract all unique student names into a set.
+ Extract all unique clubs into a set.
+ Convert each student’s club list into a set and store the mapping in a suitable data structure.
+ Remove any duplicate club names if they appear due to formatting errors.
+ Find students who are members of both AI and ML clubs.
+ Find students who are members of AI but not Robotics.Identify clubs that no student belongs to alone (i.e., clubs that always appear with at least one other club).
+ Determine the intersection of clubs for students whose names start with a vowel.
+ Find the union of clubs for students whose names end with a consonant.
+ Create a set of all characters used in all student names (ignore case).
+ Find characters that appear in every student name.
+ Identify students whose name character set is a subset of the character set of "Arun".
+ Convert the list of club sets into a list and: Find duplicate club combinations (same set, different students). Count how many students share identical club memberships.
+ Sort students based on: Number of clubs (descending), Then alphabetically (ascending)
+ Create a final set of students who satisfy all of the following: Name length is a prime number, Member of at least one club starting with a vowel, Shares no common club with "Hari"
+
+
+records = [
+    "Abi:AI,ML,Robotics",
+    "Nithya:ML,IoT",
+    "Raji:AI,CyberSecurity",
+    "Sridhar:Robotics,IoT,AI",
+    "Mathi:ML,CyberSecurity",
+    "Ramesh:AI,ML",
+    "Ganesh:IoT,Robotics,AI",
+    "Naren:ML"
+]
+student_names = set()
+all_clubs = set()
+student_clubs = {}
+for record in records:
+    name, clubs = record.split(":")
+    club_set = set(clubs.split(","))
+    student_names.add(name)
+    student_clubs[name] = club_set
+    for c in club_set:
+        all_clubs.add(c)
+print("\n1. Unique student names:")
+print(student_names)
+print()
+print("\n2. Unique clubs:")
+print(all_clubs)
+print()
+print("\n3. Student to club mapping:")
+for name in student_clubs:
+    print(name, ":", student_clubs[name])
+print()
+ai_ml = set()
+for name in student_clubs:
+    if "AI" in student_clubs[name] and "ML" in student_clubs[name]:
+        ai_ml.add(name)
+print("\n4. Students in both AI and ML:")
+print(ai_ml)
+print()
+ai_not_robotics = set()
+for name in student_clubs:
+    if "AI" in student_clubs[name] and "Robotics" not in student_clubs[name]:
+        ai_not_robotics.add(name)
+print("\n5. Students in AI but not Robotics:")
+print(ai_not_robotics)
+print()
+solo_clubs = set()
+for clubs in student_clubs.values():
+    if len(clubs) == 1:
+        solo_clubs.update(clubs)
+not_alone_clubs = all_clubs - solo_clubs
+print("\n6. Clubs never taken alone:")
+print(not_alone_clubs)
+print()
+vowel_clubs = []
+for name in student_clubs:
+    if name[0].lower() in "aeiou":
+        vowel_clubs.append(student_clubs[name])
+common_vowel = vowel_clubs[0]
+for clubs in vowel_clubs[1:]:
+    common_vowel = common_vowel & clubs
+print("\n7. Common clubs for students whose names start with a vowel:")
+print(common_vowel)
+print()
+union_consonant = set()
+for name in student_clubs:
+    if name[-1].lower() not in "aeiou":
+        union_consonant = union_consonant | student_clubs[name]
+print("\n8. Union of clubs for students whose names end with a consonant:")
+print(union_consonant)
+print()
+all_chars = set()
+for name in student_names:
+    for ch in name.lower():
+        all_chars.add(ch)
+print("\n9. All characters used in student names:")
+print(all_chars)
+print()
+common_chars = set(list(student_names)[0].lower())
+for name in list(student_names)[1:]:
+    common_chars = common_chars & set(name.lower())
+print("\n10. Characters appearing in every student name:")
+print(common_chars)
+print()
+sri_chars = set("Sridhar")
+subset_sri = set()
+for name in student_names:
+    if set(name.lower()).issubset(sri_chars):
+        subset_sri.add(name)
+print("\n11. Students whose name characters are a subset of 'Sridhar':")
+print(subset_sri)
+print()
+club_list = list(student_clubs.values())
+duplicate_sets = {}
+for clubs in club_list:
+    count = club_list.count(clubs)
+    if count > 1:
+        duplicate_sets[str(clubs)] = count
+print("\n12. Duplicate club combinations and counts:")
+print(duplicate_sets)
+print()
+student_list = []
+for name in student_clubs:
+    student_list.append([name, student_clubs[name]])
+n = len(student_list)
+for i in range(n):
+    for j in range(n - i - 1):
+        c1 = len(student_list[j][1])
+        c2 = len(student_list[j + 1][1])
+        if c1 < c2:
+            student_list[j], student_list[j + 1] = student_list[j + 1], student_list[j]
+        elif c1 == c2:
+            if student_list[j][0] > student_list[j + 1][0]:
+                student_list[j], student_list[j + 1] = student_list[j + 1], student_list[j]
+print("\n13. Students sorted by number of clubs (desc) then name (asc):")
+for s in student_list:
+    print(s[0], "->", s[1])
+print()
+def is_prime(n):
+    if n < 2:
+        return False
+    for i in range(2, n):
+        if n % i == 0:
+            return False
+    return True
+abi_clubs = student_clubs["Abi"]
+final_students = set()
+for name in student_clubs:
+    has_vowel_club = False
+    for club in student_clubs[name]:
+        if club[0].lower() in "aeiou":
+            has_vowel_club = True
+    if is_prime(len(name)) and has_vowel_club and student_clubs[name].isdisjoint(abi_clubs):
+        final_students.add(name)
+print("\n14. Final students satisfying all conditions:")
+print(final_students)
+
